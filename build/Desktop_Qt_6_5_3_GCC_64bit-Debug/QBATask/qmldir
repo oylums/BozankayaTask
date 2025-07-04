@@ -1,4 +1,0 @@
-module QBATask
-typeinfo appQBATask.qmltypes
-prefer :/QBATask/
-

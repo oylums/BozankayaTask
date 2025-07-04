@@ -1,6 +1,0 @@
-MainWindowModule_autogen/timestamp: \
-	/home/oylums/Documents/qt_tutorials/QBATask/src/ui/CMakeLists.txt \
-	/home/oylums/Qt/6.5.3/gcc_64/lib/cmake/Qt6Core/Qt6CoreConfigureFileTemplate.in \
-	/home/oylums/Qt/6.5.3/gcc_64/lib/cmake/Qt6Qml/Qt6QmlModuleDirMappingTemplate.qrc.in \
-	/home/oylums/Qt/6.5.3/gcc_64/lib/cmake/Qt6Qml/Qt6qmldirTemplate.cmake.in \
-	/home/oylums/Qt/Tools/CMake/bin/cmake
