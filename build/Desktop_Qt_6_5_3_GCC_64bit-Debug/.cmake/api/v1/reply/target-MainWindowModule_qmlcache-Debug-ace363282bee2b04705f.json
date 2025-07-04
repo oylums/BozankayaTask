@@ -1,0 +1,303 @@
+{
+	"artifacts" : 
+	[
+		{
+			"path" : "ui/CMakeFiles/MainWindowModule_qmlcache.dir/./MainWindowModule_qmlcache_autogen/mocs_compilation.cpp.o"
+		},
+		{
+			"path" : "ui/CMakeFiles/MainWindowModule_qmlcache.dir/./.rcc/qmlcache/MainWindowModule_qmlcache_loader.cpp.o"
+		}
+	],
+	"backtrace" : 8,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"_qt_internal_add_library",
+			"qt6_add_library",
+			"_qt_internal_propagate_qmlcache_object_lib",
+			"_qt_internal_target_enable_qmlcachegen",
+			"qt6_target_qml_sources",
+			"qt6_add_qml_module",
+			"qt_add_qml_module",
+			"set_property",
+			"_qt_internal_copy_dependency_properties",
+			"__qt_internal_propagate_object_library"
+		],
+		"files" : 
+		[
+			"/home/oylums/Qt/6.5.3/gcc_64/lib/cmake/Qt6Core/Qt6CoreMacros.cmake",
+			"/home/oylums/Qt/6.5.3/gcc_64/lib/cmake/Qt6Qml/Qt6QmlMacros.cmake",
+			"ui/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 2
+			},
+			{
+				"command" : 7,
+				"file" : 2,
+				"line" : 3,
+				"parent" : 0
+			},
+			{
+				"command" : 6,
+				"file" : 1,
+				"line" : 686,
+				"parent" : 1
+			},
+			{
+				"command" : 5,
+				"file" : 1,
+				"line" : 610,
+				"parent" : 2
+			},
+			{
+				"command" : 4,
+				"file" : 1,
+				"line" : 2176,
+				"parent" : 3
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 1030,
+				"parent" : 4
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 914,
+				"parent" : 5
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 2229,
+				"parent" : 6
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 2303,
+				"parent" : 7
+			},
+			{
+				"command" : 10,
+				"file" : 1,
+				"line" : 943,
+				"parent" : 5
+			},
+			{
+				"command" : 9,
+				"file" : 0,
+				"line" : 1617,
+				"parent" : 9
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 2408,
+				"parent" : 10
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 2408,
+				"parent" : 10
+			},
+			{
+				"command" : 8,
+				"file" : 0,
+				"line" : 2408,
+				"parent" : 10
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-DQT_QML_DEBUG -g -fdiagnostics-color=always"
+				},
+				{
+					"backtrace" : 11,
+					"fragment" : "-fPIC"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 12,
+					"define" : "QT_CORE_LIB"
+				},
+				{
+					"backtrace" : 12,
+					"define" : "QT_NETWORK_LIB"
+				},
+				{
+					"backtrace" : 12,
+					"define" : "QT_QMLINTEGRATION_LIB"
+				},
+				{
+					"backtrace" : 12,
+					"define" : "QT_QML_LIB"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 0,
+					"path" : "/home/oylums/Documents/qt_tutorials/QBATask/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/ui/MainWindowModule_qmlcache_autogen/include"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/home/oylums/Documents/qt_tutorials/QBATask/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/ui/MainWindowModule_autogen/include"
+				},
+				{
+					"backtrace" : 13,
+					"path" : "/home/oylums/Documents/qt_tutorials/QBATask/ui"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "/home/oylums/Qt/6.5.3/gcc_64/include/QtQml/6.5.3"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "/home/oylums/Qt/6.5.3/gcc_64/include/QtQml/6.5.3/QtQml"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "/home/oylums/Qt/6.5.3/gcc_64/include/QtCore/6.5.3"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "/home/oylums/Qt/6.5.3/gcc_64/include/QtCore/6.5.3/QtCore"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "/home/oylums/Qt/6.5.3/gcc_64/include/QtCore"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "/home/oylums/Qt/6.5.3/gcc_64/include"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "/home/oylums/Qt/6.5.3/gcc_64/mkspecs/linux-g++"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "/home/oylums/Qt/6.5.3/gcc_64/include/QtQml"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "/home/oylums/Qt/6.5.3/gcc_64/include/QtQmlIntegration"
+				},
+				{
+					"backtrace" : 13,
+					"isSystem" : true,
+					"path" : "/home/oylums/Qt/6.5.3/gcc_64/include/QtNetwork"
+				}
+			],
+			"language" : "CXX",
+			"sourceIndexes" : 
+			[
+				0,
+				1
+			]
+		}
+	],
+	"dependencies" : 
+	[
+		{
+			"id" : "MainWindowModule_qmlcache_autogen_timestamp_deps::@19b8bf288843bf358763"
+		},
+		{
+			"backtrace" : 0,
+			"id" : "MainWindowModule_qmlcache_autogen::@19b8bf288843bf358763"
+		}
+	],
+	"id" : "MainWindowModule_qmlcache::@19b8bf288843bf358763",
+	"name" : "MainWindowModule_qmlcache",
+	"paths" : 
+	{
+		"build" : "ui",
+		"source" : "ui"
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0,
+				1
+			]
+		},
+		{
+			"name" : "",
+			"sourceIndexes" : 
+			[
+				2
+			]
+		},
+		{
+			"name" : "CMake Rules",
+			"sourceIndexes" : 
+			[
+				3,
+				4
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_5_3_GCC_64bit-Debug/ui/MainWindowModule_qmlcache_autogen/mocs_compilation.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 8,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_5_3_GCC_64bit-Debug/ui/.rcc/qmlcache/MainWindowModule_qmlcache_loader.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_5_3_GCC_64bit-Debug/ui/MainWindowModule_qmlcache_autogen/timestamp",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_5_3_GCC_64bit-Debug/ui/.rcc/qmlcache/MainWindowModule_qmlcache_loader.cpp.rule",
+			"sourceGroupIndex" : 2
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Desktop_Qt_6_5_3_GCC_64bit-Debug/ui/MainWindowModule_qmlcache_autogen/timestamp.rule",
+			"sourceGroupIndex" : 2
+		}
+	],
+	"type" : "OBJECT_LIBRARY"
+}

@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/qml/QBATask/MainWindow/">
+    <file alias="main.qml">/home/oylums/Documents/qt_tutorials/QBATask/src/ui/main.qml</file>
+  </qresource>
+</RCC>
+

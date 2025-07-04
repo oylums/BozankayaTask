@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/QBATask">/home/oylums/Documents/qt_tutorials/QBATask/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/ui/QBATask</file>
+
+  </qresource>
+</RCC>

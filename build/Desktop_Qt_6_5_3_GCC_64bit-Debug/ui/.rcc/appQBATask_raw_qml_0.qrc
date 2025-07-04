@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/QBATask/">
+    <file alias="main.qml">/home/oylums/Documents/qt_tutorials/QBATask/ui/main.qml</file>
+  </qresource>
+</RCC>
+

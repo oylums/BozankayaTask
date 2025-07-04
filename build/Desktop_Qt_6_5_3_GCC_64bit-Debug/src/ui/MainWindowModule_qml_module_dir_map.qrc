@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="/">
+    <file alias="/qml/QBATask/MainWindow">/home/oylums/Documents/qt_tutorials/QBATask/build/Desktop_Qt_6_5_3_GCC_64bit-Debug/src/ui</file>
+
+  </qresource>
+</RCC>

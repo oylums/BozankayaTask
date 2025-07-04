@@ -1,0 +1,4 @@
+module QBATask.MainWindow
+typeinfo MainWindowModule.qmltypes
+prefer :/qml/QBATask/MainWindow/
+
