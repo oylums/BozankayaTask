@@ -64,15 +64,15 @@ Popup {
                         popupDialog.startClicked(popupDialog.ip, popupDialog.port)
                     } else {
                         console.log("Geçersiz IP veya port")
+                        popupDialog.close()
                     }
                 }
             }
 
             Button {
-                text: "Stop"
+                text: "cancel"
                 width: parent.width / 2 - 5
                 onClicked: {
-                    popupDialog.stopClicked()
                     popupDialog.close()
                 }
             }

@@ -16,6 +16,7 @@ void UdpReceiver::start(const QString &groupAddress, quint16 port)
 
     if (!socket4.bind(QHostAddress::AnyIPv4, port, QUdpSocket::ShareAddress)) {
         emit log("IPv4 bind failed");
+         qDebug() << "IPv4 bind failed";
         return;
     }
     socket4.joinMulticastGroup(groupAddress4);
@@ -23,9 +24,11 @@ void UdpReceiver::start(const QString &groupAddress, quint16 port)
     if (!socket6.bind(QHostAddress::AnyIPv6, port, QUdpSocket::ShareAddress) ||
         !socket6.joinMulticastGroup(groupAddress6)) {
         emit log("IPv6 bind or join multicast group failed");
+         qDebug() << "IPv6 bind or join multicast group failed";
     }
 
     emit log(QString("Receiver started. Listening on %1:%2").arg(groupAddress).arg(port));
+    qDebug() << "Receiver started. Listening on %1:%2";
 }
 
 void UdpReceiver::stop()

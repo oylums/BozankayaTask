@@ -10,5 +10,6 @@ qt_add_qml_module(MainWindowModule
         ReceiverDialog.qml
         CanDialog.qml
         Felifim.qml
+        DriveShapes.qml
     NO_PLUGIN
 )

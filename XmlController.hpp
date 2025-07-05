@@ -2,32 +2,33 @@
 #define XMLCONTROLLER_H
 
 #include <QObject>
-#include <QStringList>
-#include <QFileSystemWatcher>
+#include <QVariantList>
+#include <QFile>
+#include <QDomDocument>
 
-class XmlController : public QObject {
+class XmlController : public QObject
+{
     Q_OBJECT
-    Q_PROPERTY(QStringList values READ values NOTIFY valuesChanged)
+    Q_PROPERTY(QVariantList shapes READ shapes NOTIFY shapesChanged)
 
 public:
     explicit XmlController(QObject *parent = nullptr);
-    QStringList values() const;
-
-    Q_INVOKABLE void loadXml();
     Q_INVOKABLE void setFilePath(const QString &path);
 
-signals:
-    void valuesChanged();
-    void parseError(const QString &message);
+    QVariantList shapes() const;
 
-private slots:
-    void onFileChanged();
+public slots:
+    Q_INVOKABLE void parseXml();
+
+signals:
+    void shapesChanged();
+    void parseError(const QString &error);
+
+    void filePathChanged();
 
 private:
-    QStringList m_values;
     QString m_filePath;
-    QFileSystemWatcher watcher;
-    void parseXml();
+    QVariantList m_shapes;
 };
 
 #endif // XMLCONTROLLER_H

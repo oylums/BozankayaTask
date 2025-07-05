@@ -13,8 +13,8 @@ void UdpSender::start(const QString &groupAddress, quint16 port)
 
     groupAddress4 = QHostAddress(groupAddress);
     groupAddress6 = groupAddress4.isNull() ? QHostAddress() : QHostAddress::Null;
+    _port = port;
 
-    // Bind sockets
     socket4.bind(QHostAddress::AnyIPv4, 0);
     socket6.bind(QHostAddress::AnyIPv6, socket4.localPort());
 
@@ -23,6 +23,7 @@ void UdpSender::start(const QString &groupAddress, quint16 port)
 
     emit log(QString("Sender started. Sending to %1:%2").arg(groupAddress).arg(port));
 }
+
 
 void UdpSender::stop()
 {
@@ -38,12 +39,15 @@ void UdpSender::stop()
 
 void UdpSender::sendDatagram()
 {
+    if (_port == 0 || groupAddress4.isNull()) return;
+
     QByteArray datagram = "Multicast message " + QByteArray::number(messageNo++);
-    quint16 port = 45454; // port ve ip yi dinamik yapmayı unutma oylum
 
-    socket4.writeDatagram(datagram, groupAddress4, port);
+    socket4.writeDatagram(datagram, groupAddress4, _port);
     if (socket6.state() == QAbstractSocket::BoundState)
-        socket6.writeDatagram(datagram, groupAddress6, port);
+        socket6.writeDatagram(datagram, groupAddress6, _port);
 
+    qDebug() << "send datagram run";
     emit log(QString("Sent: %1").arg(QString(datagram)));
 }
+

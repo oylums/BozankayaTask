@@ -26,6 +26,7 @@ private:
     QHostAddress groupAddress4;
     QHostAddress groupAddress6;
     int messageNo = 0;
+    quint16 _port = 0;
 };
 
 #endif // UDPSENDER_H

@@ -7,20 +7,22 @@ Popup {
     modal: true
     focus: true
     width: 320
-    height: 220
+    height: 250
     padding: 20
 
+    property string label: ""
     property string ip: ""
     property int port: 0
-    signal startReceiver(string ip, int port)
+    signal startClicked(string ip, int port)
+    signal stopClicked()
 
     anchors.centerIn: Overlay.overlay
 
     background: Rectangle {
-        color: "#eaf4ff"
-        border.color: "#3399cc"
-        border.width: 1
+        color: "#f9f9f9"
         radius: 12
+        border.color: "#cccccc"
+        border.width: 1
     }
 
     Column {
@@ -29,31 +31,44 @@ Popup {
         width: parent.width - 40
 
         TextField {
-            placeholderText: "Receiver IP"
+            placeholderText: "IP adresi (192.168.1.12)"
             text: ip
             onTextChanged: popup.ip = text
             width: parent.width
         }
 
         TextField {
-            placeholderText: "Receiver Port"
+            placeholderText: "Port (45454)"
             inputMethodHints: Qt.ImhDigitsOnly
             text: port > 0 ? port.toString() : ""
             onTextChanged: popup.port = parseInt(text)
             width: parent.width
         }
 
-        Button {
-            text: "Receiver Başlat"
+        Row {
+            spacing: 10
             width: parent.width
+
+        Button {
+            text: "Start"
+             width: parent.width / 2 - 5
             onClicked: {
                 if (popup.ip && popup.port > 0) {
-                    popup.startReceiver(popup.ip, popup.port)
+                    popup.startClicked(popup.ip, popup.port)
                     popup.close()
                 } else {
                     console.log("IP ya da port geçersiz.")
                 }
             }
+        }
+
+        Button {
+            text: "cancel"
+            width: parent.width / 2 - 5
+            onClicked: {
+                 popup.close()
+            }
+        }
         }
     }
 }

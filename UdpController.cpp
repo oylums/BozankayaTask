@@ -22,7 +22,7 @@ void UdpController::startSender(const QString &ip, int port)
 
 void UdpController::startReceiver(const QString &group, int port)
 {
-    qDebug() << "[UdpController] Sender başlatılıyor → Group:" << group << " Port:" << port;
+    qDebug() << "[UdpController] Receiver başlatılıyor → Group:" << group << " Port:" << port;
     _receiver->start(group,port);
 
 }

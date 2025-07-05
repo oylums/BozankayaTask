@@ -1,44 +1,30 @@
 #include "XmlController.hpp"
-#include <QFile>
-#include <QDomDocument>
-#include <QDebug>
-#include <QCoreApplication>
 
-XmlController::XmlController(QObject *parent) : QObject(parent) {}
-
-void XmlController::setFilePath(const QString &path) {
-    qDebug()<<path;
-    m_filePath = path;
-    watcher.addPath(m_filePath);
-    connect(&watcher, &QFileSystemWatcher::fileChanged, this, &XmlController::onFileChanged);
-    parseXml();
+XmlController::XmlController(QObject *parent)
+    : QObject(parent)
+{
+    connect(this,&XmlController::filePathChanged,this,&XmlController::parseXml);
 }
 
-QStringList XmlController::values() const {
-    return m_values;
+void XmlController::setFilePath(const QString &path)
+{
+    if(m_filePath != path) {
+        m_filePath = path;
+        emit filePathChanged();
+    }
 }
 
-void XmlController::onFileChanged() {
-    watcher.removePath(m_filePath);
-    watcher.addPath(m_filePath);
-    parseXml();
-    qDebug() << "file changed ";
+QVariantList XmlController::shapes() const
+{
+    return m_shapes;
 }
 
-void XmlController::loadXml() {
-    parseXml();
-}
-
-void XmlController::parseXml() {
-
-    // qDebug() << "Dosya yolu:" << m_filePath;
-    // qDebug() << "Dosya var mı? " << QFile::exists(m_filePath);
-
-
+void XmlController::parseXml()
+{
     QFile file(m_filePath);
     if (!file.open(QIODevice::ReadOnly)) {
         emit parseError("XML dosyası açılamadı!");
-        qDebug() << "[XmlController] Dosya açılamadı ";
+        qDebug() << "XML file open error";
         return;
     }
 
@@ -50,15 +36,44 @@ void XmlController::parseXml() {
         return;
     }
 
-    QStringList list;
-    QDomNodeList items = doc.elementsByTagName("item");
-    for (int i = 0; i < items.count(); ++i) {
-        QDomElement el = items.at(i).toElement();
-        list << el.text();
+    QDomNodeList shapesList = doc.elementsByTagName("Shapes");
+    if (shapesList.isEmpty()) {
+        emit parseError("Shapes etiketi bulunamadı!");
+         qDebug() << "Shapes etiketi bulunamadı";
+        return;
     }
 
-    if (list != m_values) {
-        m_values = list;
-        emit valuesChanged();
+    QVariantList newShapes;
+
+    QDomNode shapesNode = shapesList.at(0);
+    QDomNode child = shapesNode.firstChild();
+
+    while (!child.isNull()) {
+        QDomElement element = child.toElement();
+        if (!element.isNull()) {
+            QVariantMap shape;
+            shape["type"] = element.tagName();
+            shape["id"] = element.attribute("id");
+
+            QDomNamedNodeMap attrs = element.attributes();
+            for (int i = 0; i < attrs.count(); ++i) {
+                QDomAttr attr = attrs.item(i).toAttr();
+                if (attr.name() != "id") {
+                    shape[attr.name()] = attr.value();
+                }
+            }
+
+            // Text elemanının içeriğini al
+            if (element.tagName() == "Text") {
+                shape["text"] = element.text().trimmed();
+            }
+
+            newShapes.append(shape);
+        }
+
+        child = child.nextSibling();
     }
+
+    m_shapes = newShapes;
+    emit shapesChanged();
 }
