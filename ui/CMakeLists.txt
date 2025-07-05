@@ -6,5 +6,9 @@ qt_add_qml_module(MainWindowModule
     RESOURCE_PREFIX /qml
     QML_FILES
         main.qml
+        SenderDialog.qml
+        ReceiverDialog.qml
+        CanDialog.qml
+        Felifim.qml
     NO_PLUGIN
 )
