@@ -17,3 +17,8 @@ XmlController* QmlGlobal::xmlController() const
 {
     return _xmlController;
 }
+
+AppLogModel *QmlGlobal::logModel() const
+{
+    return AppMessages::getModel();
+}

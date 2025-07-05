@@ -5,6 +5,7 @@ UdpSender::UdpSender(QObject *parent)
     : QObject{parent}
 {
     connect(&timer, &QTimer::timeout, this, &UdpSender::sendDatagram);
+
 }
 
 void UdpSender::start(const QString &groupAddress, quint16 port)
@@ -14,6 +15,7 @@ void UdpSender::start(const QString &groupAddress, quint16 port)
     groupAddress4 = QHostAddress(groupAddress);
     groupAddress6 = groupAddress4.isNull() ? QHostAddress() : QHostAddress::Null;
     _port = port;
+    qDebug()<< _port;
 
     socket4.bind(QHostAddress::AnyIPv4, 0);
     socket6.bind(QHostAddress::AnyIPv6, socket4.localPort());
@@ -21,7 +23,7 @@ void UdpSender::start(const QString &groupAddress, quint16 port)
     messageNo = 0;
     timer.start(1000);
 
-    emit log(QString("Sender started. Sending to %1:%2").arg(groupAddress).arg(port));
+    emit connectedChanged();
 }
 
 
@@ -34,7 +36,13 @@ void UdpSender::stop()
     if (socket6.state() == QAbstractSocket::BoundState) {
         socket6.close();
     }
-    emit log("Sender stopped.");
+    emit connectedChanged();
+}
+
+bool UdpSender::isConnected() const
+{
+    qDebug() << "[socket4]-Sender state. " << socket4.state();
+    return socket4.state() == QAbstractSocket::BoundState;
 }
 
 void UdpSender::sendDatagram()
@@ -42,12 +50,14 @@ void UdpSender::sendDatagram()
     if (_port == 0 || groupAddress4.isNull()) return;
 
     QByteArray datagram = "Multicast message " + QByteArray::number(messageNo++);
-
-    socket4.writeDatagram(datagram, groupAddress4, _port);
-    if (socket6.state() == QAbstractSocket::BoundState)
+    qDebug() << socket4.state();
+    if (socket4.state() == QAbstractSocket::BoundState){
+        socket4.writeDatagram(datagram, groupAddress4, _port);
+        qDebug() << QString("socket4 send datagram run c: %1 s: %2").arg(socket4.error()).arg(socket4.errorString());
+    }
+    if (socket6.state() == QAbstractSocket::BoundState){
         socket6.writeDatagram(datagram, groupAddress6, _port);
-
-    qDebug() << "send datagram run";
-    emit log(QString("Sent: %1").arg(QString(datagram)));
+        qDebug() << QString("socket6 send datagram run c: %1 s: %2").arg(socket6.error()).arg(socket6.errorString());
+    }
 }
 

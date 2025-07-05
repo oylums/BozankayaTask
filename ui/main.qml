@@ -4,6 +4,7 @@ import QtQuick.Layouts
 import QtQuick.Dialogs
 import UDP.CONT 1.0
 import XML.CONT 1.0
+import LOG.MOD  1.0
 
 ApplicationWindow {
     id: window
@@ -143,17 +144,30 @@ ApplicationWindow {
             border.color: "black"
             radius: 5
 
-            ScrollView {
-                anchors.fill: parent
-                TextArea {
-                    id: logArea
-                    readOnly: true
-                    wrapMode: Text.Wrap
-                    font.family: "monospace"
-                    font.pixelSize: 12
-                    text: qmlGlobal.udpController.logs.join("\n")
+            ListView {
+                id: logListview
+                clip: true
+                anchors.fill:parent
+                model:qmlGlobal.logModel
+
+                delegate: Rectangle {
+                    color: index % 2 == 0 ? "#859144" : "900000"
+                    width: logListview.width
+                    height: 30
+
+                    Text {
+                        anchors.verticalCenter: parent.verticalCenter
+                        width: parent.width
+                        color: "#FFFFFF"
+                        font.pointSize: 12
+                        text: display
+                    }
+
+                    Component.onCompleted: logListview.currentIndex = index
+
                 }
             }
+
         }
     }
 

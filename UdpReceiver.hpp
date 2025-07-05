@@ -8,12 +8,16 @@
 class UdpReceiver : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool connected READ isConnected NOTIFY connectedChanged)
+
 public:
     explicit UdpReceiver(QObject *parent = nullptr);
     void start(const QString &groupAddress, quint16 port);
     void stop();
+    bool isConnected() const;
 
 signals:
+    void connectedChanged();
     void log(const QString &msg);
 
 private slots:
@@ -24,7 +28,7 @@ private:
     QUdpSocket socket6;
     QHostAddress groupAddress4;
     QHostAddress groupAddress6;
-signals:
+    quint16 _port = 0;
 };
 
 #endif // UDPRECEIVER_H

@@ -8,13 +8,17 @@
 class UdpSender : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(bool connected READ isConnected NOTIFY connectedChanged)
+
 public:
     explicit UdpSender(QObject *parent = nullptr);
     void start(const QString &groupAddress, quint16 port);
     void stop();
+    bool isConnected() const;
 
 signals:
     void log(const QString &msg);
+    void connectedChanged();
 
 private slots:
     void sendDatagram();

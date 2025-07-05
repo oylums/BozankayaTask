@@ -1,6 +1,6 @@
 #include "Application.hpp"
 #include <QQmlContext>
-
+#include "AppMessages.hpp"
 
 Application* Application::_app{nullptr};
 
@@ -13,14 +13,14 @@ Application::Application(int argc, char **argv)
 
 Application::~Application()
 {
-    qDebug() << "App closed successfully";
+    delete _engine;
 }
 
 void Application::initCommon()
 {
     qmlRegisterUncreatableType<UdpController>("UDP.CONT",1,0,"UDP","Ref only");
     qmlRegisterUncreatableType<XmlController>("XML.CONT",1,0,"XML","Ref only");
-
+    qmlRegisterUncreatableType<AppLogModel>("LOG.MOD",1,0,"LOG_MODEL","Ref only");
 }
 
 void Application::init()
