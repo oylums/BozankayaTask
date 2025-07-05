@@ -1,6 +1,6 @@
 #include "Application.hpp"
-
 #include <QQmlContext>
+
 
 Application* Application::_app{nullptr};
 
@@ -18,8 +18,9 @@ Application::~Application()
 
 void Application::initCommon()
 {
-    // class A;
-    // qmlRegisterUncreatableType<A>("QBATask.A",1,0,"A","Ref only");
+    qmlRegisterUncreatableType<UdpController>("UDP.CONT",1,0,"UDP","Ref only");
+    qmlRegisterUncreatableType<XmlController>("XML.CONT",1,0,"XML","Ref only");
+
 }
 
 void Application::init()

@@ -15,7 +15,6 @@ Popup {
     signal startClicked(string ip, int port)
     signal stopClicked()
 
-    // 🔥 Tam ortada açılmasını sağla
     anchors.centerIn: Overlay.overlay
 
     background: Rectangle {
