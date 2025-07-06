@@ -16,6 +16,8 @@ public:
     void stop();
     bool isConnected() const;
 
+    void sendByteArrayWithDatagram(QByteArray payload);
+
 signals:
     void log(const QString &msg);
     void connectedChanged();

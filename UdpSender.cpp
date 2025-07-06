@@ -1,11 +1,14 @@
 #include "UdpSender.hpp"
 #include <QDateTime>
+#include <QSettings>
 
 UdpSender::UdpSender(QObject *parent)
     : QObject{parent}
 {
     connect(&timer, &QTimer::timeout, this, &UdpSender::sendDatagram);
 
+    QSettings settings;
+    groupAddress4 = QHostAddress(settings.value("ipadress","0.0.0.0").toString());
 }
 
 void UdpSender::start(const QString &groupAddress, quint16 port)
@@ -16,6 +19,9 @@ void UdpSender::start(const QString &groupAddress, quint16 port)
     groupAddress6 = groupAddress4.isNull() ? QHostAddress() : QHostAddress::Null;
     _port = port;
     qDebug()<< _port;
+
+    QSettings settings;
+    settings.setValue("ipadress",groupAddress),
 
     socket4.bind(QHostAddress::AnyIPv4, 0); // sender da bind gerekmez
     socket6.bind(QHostAddress::AnyIPv6, socket4.localPort());
@@ -45,19 +51,28 @@ bool UdpSender::isConnected() const
     return socket4.state() == QAbstractSocket::BoundState;
 }
 
+void UdpSender::sendByteArrayWithDatagram(QByteArray payload)
+{
+    if (socket4.state() == QAbstractSocket::BoundState){
+        socket4.writeDatagram(payload, groupAddress4, _port);
+        qDebug() << "Sending CAN over UDP payload:" << payload.toHex(' ');
+
+    }
+}
+
 void UdpSender::sendDatagram()
 {
     if (_port == 0 || groupAddress4.isNull()) return;
 
     QByteArray datagram = "Multicast message " + QByteArray::number(messageNo++);
-    qDebug() << socket4.state();
+   // qDebug() << socket4.state();
     if (socket4.state() == QAbstractSocket::BoundState){
         socket4.writeDatagram(datagram, groupAddress4, _port);
         qDebug() << QString("socket4 send datagram run c: %1 s: %2").arg(socket4.error()).arg(socket4.errorString());
     }
     if (socket6.state() == QAbstractSocket::BoundState){
         socket6.writeDatagram(datagram, groupAddress6, _port);
-        qDebug() << QString("socket6 send datagram run c: %1 s: %2").arg(socket6.error()).arg(socket6.errorString());
+        //qDebug() << QString("socket6 send datagram run c: %1 s: %2").arg(socket6.error()).arg(socket6.errorString());
     }
 }
 

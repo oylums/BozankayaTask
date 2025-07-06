@@ -11,8 +11,8 @@ Popup {
     padding: 20
 
     property string label: ""
-    property string ip: ""
-    property int port: 0
+    property string ip: qmlGlobal.udpController.lastipadress
+    property int port: qmlGlobal.udpController.lastPort
     signal startClicked(string ip, int port)
     signal stopClicked()
 

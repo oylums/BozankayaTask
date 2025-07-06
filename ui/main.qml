@@ -13,6 +13,7 @@ ApplicationWindow {
     width: 800
     height: 600
     title: qsTr("Bozankaya Tech")
+    color: "black"
 
     Dialog {
         id: senderReceiverDialog
@@ -100,9 +101,17 @@ ApplicationWindow {
         anchors.fill: parent
         spacing: 10
 
+        Item {
+            Layout.preferredWidth : 8
+        }
+
         RowLayout {
             Layout.fillWidth: true
             spacing: 10
+
+            Item {
+                Layout.preferredWidth : 8
+            }
 
             Rectangle {
                 width: 16
@@ -152,11 +161,25 @@ ApplicationWindow {
         }
 
         DriveShapes {
+            color: "grey"
             Layout.fillWidth: true
             Layout.fillHeight: true
         }
 
+        UdpSocketList {
+            Text {
+                anchors.right: parent.right
+                id: udpListText
+                text: qsTr("UDP RECEIVERS LIST")
+                color: "white"
+            }
+            Layout.fillWidth: true
+            Layout.preferredHeight: 100
+        }
+
+
         Rectangle {
+            id: logSection
             Layout.fillWidth: true
             height: 100
             color: "#222"

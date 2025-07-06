@@ -93,10 +93,9 @@ void CanInterfaceController::onFramesReceived()
 {
     while (m_device->framesAvailable()) {
         QCanBusFrame frame = m_device->readFrame();
-        emit messageReceived(QVariant::fromValue(frame));
-
         qDebug() << "Frame received:";
         qDebug() << "  ID:" << QString("0x%1").arg(frame.frameId(), 0, 16).toUpper();
         qDebug() << "  Data:" << frame.payload().toHex(' ').toUpper();
+        emit messageReceived(frame);
     }
 }

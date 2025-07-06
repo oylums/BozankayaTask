@@ -5,16 +5,24 @@
 #include <QUdpSocket>
 #include <QTimer>
 
+#include <QCanBusFrame>
+#include <QSettings>
+
 class UdpReceiver : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(bool connected READ isConnected NOTIFY connectedChanged)
+    Q_PROPERTY(QString ipAddress READ ipAddress NOTIFY connectedChanged)
+    Q_PROPERTY(QString port READ port NOTIFY connectedChanged)
 
 public:
     explicit UdpReceiver(QObject *parent = nullptr);
     void start(const QString &groupAddress, quint16 port);
     void stop();
     bool isConnected() const;
+
+    QString ipAddress() const { return _groupAddress.toString(); }
+    QString port() const { return QString::number(socket.localPort()); }
 
 signals:
     void connectedChanged();
@@ -24,11 +32,11 @@ private slots:
     void processPendingDatagrams();
 
 private:
-    QUdpSocket socket4;
-    QUdpSocket socket6;
-    QHostAddress groupAddress4;
-    QHostAddress groupAddress6;
+    QUdpSocket socket;
+    QHostAddress _groupAddress;
     quint16 _port = 0;
 };
+
+
 
 #endif // UDPRECEIVER_H

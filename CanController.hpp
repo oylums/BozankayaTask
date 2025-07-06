@@ -20,7 +20,7 @@ public:
 
 signals:
     void connectedChanged();
-    void messageReceived(QVariant frame);
+    void messageReceived(QCanBusFrame frame);
 
 private slots:
     void onFramesReceived();

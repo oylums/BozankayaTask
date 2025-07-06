@@ -27,6 +27,9 @@ Popup {
         standardButtons: DialogButtonBox.Ok
         anchors.centerIn: parent
 
+        width: 200
+        height: 200
+
         background: Rectangle {
             color: "#FFF176"
             radius: 8
@@ -52,6 +55,9 @@ Popup {
         modal: true
         standardButtons: DialogButtonBox.Ok
         anchors.centerIn: parent
+
+        width: 200
+        height: 200
 
         background: Rectangle {
             color: "#FFF176"

@@ -10,6 +10,7 @@ qt_add_qml_module(MainWindowModule
         ReceiverDialog.qml
         CanDialog.qml
         DriveShapes.qml
+        UdpSocketList.qml
     RESOURCES
          ../images/felif.png
          ../doc/test.xml
