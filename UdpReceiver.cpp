@@ -4,7 +4,7 @@ UdpReceiver::UdpReceiver(QObject *parent)
     : QObject{parent}
 {
     connect(&socket4, &QUdpSocket::readyRead, this, &UdpReceiver::processPendingDatagrams);
-   // connect(&socket6, &QUdpSocket::readyRead, this, &UdpReceiver::processPendingDatagrams);
+    connect(&socket6, &QUdpSocket::readyRead, this, &UdpReceiver::processPendingDatagrams);
 }
 
 void UdpReceiver::start(const QString &groupAddress, quint16 port)
@@ -13,7 +13,7 @@ void UdpReceiver::start(const QString &groupAddress, quint16 port)
     _port = port;
 
     groupAddress4 = QHostAddress(groupAddress);
-   // groupAddress6 = groupAddress4.isNull() ? QHostAddress() : QHostAddress::Null;
+    groupAddress6 = groupAddress4.isNull() ? QHostAddress() : QHostAddress::Null;
 
     if (!socket4.bind(QHostAddress::AnyIPv4, _port, QUdpSocket::ShareAddress)) {
          qDebug() << "IPv4 bind failed";
@@ -21,10 +21,10 @@ void UdpReceiver::start(const QString &groupAddress, quint16 port)
     }
     socket4.joinMulticastGroup(groupAddress4);
 
-    // if (!socket6.bind(QHostAddress::AnyIPv6, port, QUdpSocket::ShareAddress) ||
-    //     !socket6.joinMulticastGroup(groupAddress6)) {
-    //      qDebug() << "IPv6 bind or join multicast group failed";
-    // }
+    if (!socket6.bind(QHostAddress::AnyIPv6, port, QUdpSocket::ShareAddress) ||
+        !socket6.joinMulticastGroup(groupAddress6)) {
+         qDebug() << "IPv6 bind or join multicast group failed";
+    }
    emit connectedChanged();
    qDebug() << QString("Receiver started. Listening on %1:%2").arg(groupAddress4.toString()).arg(_port);
 }
@@ -35,10 +35,10 @@ void UdpReceiver::stop()
         socket4.close();
         qDebug() << "[socket4]-Receiver stopped. ";
     }
-    // if (socket6.state() == QAbstractSocket::BoundState) {
-    //     socket6.close();
-    //     qDebug() << "[socket6]-Receiver stopped. ";
-    // }
+    if (socket6.state() == QAbstractSocket::BoundState) {
+        socket6.close();
+        qDebug() << "[socket6]-Receiver stopped. ";
+    }
     emit connectedChanged();
 }
 
@@ -61,11 +61,11 @@ void UdpReceiver::processPendingDatagrams()
 
     }
 
-    // while (socket6.hasPendingDatagrams()) {
-    //     QByteArray datagram;
-    //     datagram.resize(socket6.pendingDatagramSize());
-    //     QHostAddress sender;
-    //     quint16 senderPort;
-    //     socket6.readDatagram(datagram.data(), datagram.size(), &sender, &senderPort);
-    // }
+    while (socket6.hasPendingDatagrams()) {
+        QByteArray datagram;
+        datagram.resize(socket6.pendingDatagramSize());
+        QHostAddress sender;
+        quint16 senderPort;
+        socket6.readDatagram(datagram.data(), datagram.size(), &sender, &senderPort);
+    }
 }

@@ -15,7 +15,7 @@ UdpController::UdpController(QObject *parent)
 
 void UdpController::startSender(const QString &ip, int port)
 {
-    //connect(_sender, &UdpSender::connectedChanged, this, &UdpController::connectedChanged);
+    connect(_sender, &UdpSender::connectedChanged, this, &UdpController::connectedChanged);
     qDebug() << "[UdpController] Sender başlatılıyor → IP:" << ip << " Port:" << port;
     _sender->start(ip,port);
 }
@@ -24,7 +24,7 @@ void UdpController::startSender(const QString &ip, int port)
 
 void UdpController::startReceiver(const QString &group, int port)
 {
-    //connect(_receiver, &UdpReceiver::connectedChanged, this, &UdpController::connectedChanged);
+    connect(_receiver, &UdpReceiver::connectedChanged, this, &UdpController::connectedChanged);
     qDebug() << "[UdpController] Receiver başlatılıyor → Group:" << group << " Port:" << port;
     _receiver->start(group,port);
 }

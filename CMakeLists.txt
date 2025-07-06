@@ -5,8 +5,7 @@ project(QBATask VERSION 0.1 LANGUAGES CXX)
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(Qt6 6.2 COMPONENTS Quick Xml Concurrent REQUIRED)
-
+find_package(Qt6 6.2 COMPONENTS Quick Xml Concurrent Core SerialBus REQUIRED)
 
 qt_add_executable(appQBATask
     main.cpp
@@ -17,6 +16,7 @@ qt_add_executable(appQBATask
     UdpSender.hpp UdpSender.cpp
     UdpReceiver.hpp UdpReceiver.cpp
     AppMessages.hpp AppMessages.cpp
+    CanController.hpp CanController.cpp
 )
 
 add_subdirectory(ui)
@@ -43,6 +43,7 @@ target_link_libraries(appQBATask
     PRIVATE Qt6::Core
     PRIVATE Qt6::Xml
     PRIVATE Qt6::Concurrent
+    PRIVATE Qt6::SerialBus
 )
 
 include(GNUInstallDirs)

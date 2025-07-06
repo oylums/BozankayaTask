@@ -5,6 +5,7 @@ import QtQuick.Dialogs
 import UDP.CONT 1.0
 import XML.CONT 1.0
 import LOG.MOD  1.0
+import CAN.COMM 1.0
 
 ApplicationWindow {
     id: window
@@ -69,6 +70,15 @@ ApplicationWindow {
         }
     }
 
+    CanDialog {
+        id: canDialog
+
+         onStartClicked: function(m_interface, bitrate) {
+           console.log("Seçilen CAN Arayüzü:", m_interface, "Bitrate:", bitrate)
+           qmlGlobal.canController.start(m_interface,bitrate)
+       }
+    }
+
     FileDialog {
         id: fileDialog
         title: "Bir dosya seçin"
@@ -116,19 +126,19 @@ ApplicationWindow {
                 width: 16
                 height: 16
                 radius: 8
-                color: qmlGlobal.socketCan.connected ? "green" : "red"
+                color: qmlGlobal.canController.connected ? "green" : "red"
                 border.color: "black"
                 border.width: 1
             }
 
             Button {
                 text: "Configure CAN"
-                onClicked: socketCanDialog.open()
+                onClicked: canDialog.open()
             }
 
             Button {
                 text: "Stop"
-                onClicked: qmlGlobal.socketCanController.stop()
+                onClicked: qmlGlobal.canController.stop()
             }
         }
 

@@ -5,6 +5,8 @@
 #include <QVariantList>
 #include <QFile>
 #include <QDomDocument>
+#include <QFileSystemWatcher>
+
 
 class XmlController : public QObject
 {
@@ -19,6 +21,7 @@ public:
 
 public slots:
     Q_INVOKABLE void parseXml();
+    void onFileChanged(const QString &path);
 
 signals:
     void shapesChanged();
@@ -29,6 +32,7 @@ signals:
 private:
     QString m_filePath;
     QVariantList m_shapes;
+    QFileSystemWatcher m_fileWatcher;
 };
 
 #endif // XMLCONTROLLER_H

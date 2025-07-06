@@ -51,7 +51,7 @@ Popup {
 
         Button {
             text: "Start"
-             width: parent.width / 2 - 5
+            width: parent.width / 2 - 5
             onClicked: {
                 if (popup.ip && popup.port > 0) {
                     popup.startClicked(popup.ip, popup.port)

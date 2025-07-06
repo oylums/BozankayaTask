@@ -17,7 +17,7 @@ void UdpSender::start(const QString &groupAddress, quint16 port)
     _port = port;
     qDebug()<< _port;
 
-    socket4.bind(QHostAddress::AnyIPv4, 0);
+    socket4.bind(QHostAddress::AnyIPv4, 0); // sender da bind gerekmez
     socket6.bind(QHostAddress::AnyIPv6, socket4.localPort());
 
     messageNo = 0;

@@ -21,6 +21,7 @@ void Application::initCommon()
     qmlRegisterUncreatableType<UdpController>("UDP.CONT",1,0,"UDP","Ref only");
     qmlRegisterUncreatableType<XmlController>("XML.CONT",1,0,"XML","Ref only");
     qmlRegisterUncreatableType<AppLogModel>("LOG.MOD",1,0,"LOG_MODEL","Ref only");
+    qmlRegisterUncreatableType<CanInterfaceController>("CAN.COMM",1,0,"CAN_COMM","Ref only");
 }
 
 void Application::init()

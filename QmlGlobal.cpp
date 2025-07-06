@@ -5,7 +5,8 @@ QmlGlobal::QmlGlobal(QObject *parent)
     : QObject(parent)
 {
      _udpController = new UdpController(this);
-     _xmlController=new XmlController(this);
+     _xmlController = new XmlController(this);
+     _canController = new CanInterfaceController(this);
 }
 
 UdpController* QmlGlobal::udpController() const
@@ -16,6 +17,11 @@ UdpController* QmlGlobal::udpController() const
 XmlController* QmlGlobal::xmlController() const
 {
     return _xmlController;
+}
+
+CanInterfaceController *QmlGlobal::canController() const
+{
+    return _canController;
 }
 
 AppLogModel *QmlGlobal::logModel() const

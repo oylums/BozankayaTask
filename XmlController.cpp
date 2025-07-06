@@ -4,12 +4,18 @@ XmlController::XmlController(QObject *parent)
     : QObject(parent)
 {
     connect(this,&XmlController::filePathChanged,this,&XmlController::parseXml);
+    connect(&m_fileWatcher, &QFileSystemWatcher::fileChanged, this, &XmlController::onFileChanged);
 }
 
 void XmlController::setFilePath(const QString &path)
 {
     if(m_filePath != path) {
         m_filePath = path;
+        m_fileWatcher.removePaths(m_fileWatcher.files());
+        if (QFile::exists(m_filePath)) {
+            m_fileWatcher.addPath(m_filePath);
+        }
+
         emit filePathChanged();
     }
 }
@@ -63,7 +69,7 @@ void XmlController::parseXml()
                 }
             }
 
-            // Text elemanının içeriğini al
+
             if (element.tagName() == "Text") {
                 shape["text"] = element.text().trimmed();
             }
@@ -76,4 +82,13 @@ void XmlController::parseXml()
 
     m_shapes = newShapes;
     emit shapesChanged();
+}
+void XmlController::onFileChanged(const QString &path)
+{
+    qDebug() << "XML dosyası değişti, tekrar parse ediliyor:" << path;
+    if (QFile::exists(path)) {
+        m_fileWatcher.addPath(path);
+    }
+
+    parseXml();
 }
