@@ -31,7 +31,7 @@ void CanInterfaceController::start(const QString &interface, int bitrate)
     }
 
     if (interface == "vcan0") {
-        m_device->setConfigurationParameter(QCanBusDevice::BitRateKey, QVariant()); // bitrate i default ayarma engellensin diye ekledin.
+        m_device->setConfigurationParameter(QCanBusDevice::BitRateKey, QVariant()); //**//
     }
     if (!m_device->connectDevice()) {
         qWarning() << "CAN connect error:" << m_device->errorString();
@@ -58,18 +58,36 @@ void CanInterfaceController::stop()
     }
 }
 
-void CanInterfaceController::sendFrame(quint32 id, const QByteArray &data)
-{
-    if (!m_device) return;
-
-    QCanBusFrame frame(id, data);
-    m_device->writeFrame(frame);
-}
 
 bool CanInterfaceController::isConnected() const
 {
     return m_device && m_device->state() == QCanBusDevice::ConnectedState;
 }
+
+void CanInterfaceController::sendFrame(const QString &idHex, const QString &dataHex)
+{
+    if (!m_device || (m_device->state() != QCanBusDevice::ConnectedState))
+        return;
+
+    bool ok;
+    int id = idHex.toInt(&ok, 16);
+    if (!ok) {
+        qWarning() << "Id Error:" << idHex;
+        return;
+    }
+
+    QByteArray payload = QByteArray::fromHex(dataHex.toUtf8());
+    if (payload.size() > 8) {
+        qWarning() << "Error check frame size.";
+        return;
+    }
+
+    QCanBusFrame frame(id, payload);
+    m_device->writeFrame(frame);
+
+    qDebug() << "Send succces" << frame.toString();
+}
+
 
 void CanInterfaceController::onFramesReceived()
 {

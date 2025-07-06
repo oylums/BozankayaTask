@@ -31,7 +31,7 @@ Popup {
         width: parent.width - 40
 
         TextField {
-            placeholderText: "IP adresi (192.168.1.12)"
+            placeholderText: "IP adresi (239.255.0.1)"
             text: ip
             onTextChanged: popup.ip = text
             width: parent.width

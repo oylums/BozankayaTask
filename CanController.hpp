@@ -15,8 +15,7 @@ public:
 
     Q_INVOKABLE void start(const QString &interface, int bitrate = 500000);
     Q_INVOKABLE void stop();
-    Q_INVOKABLE void sendFrame(quint32 id, const QByteArray &data);
-
+    Q_INVOKABLE void sendFrame(const QString &idHex, const QString &dataHex);
     bool isConnected() const;
 
 signals:

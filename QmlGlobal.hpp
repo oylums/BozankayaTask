@@ -13,7 +13,7 @@ class QmlGlobal : public QObject
 
     Q_PROPERTY(UdpController* udpController READ udpController CONSTANT)
     Q_PROPERTY(XmlController* xmlController READ xmlController CONSTANT)
-     Q_PROPERTY(CanInterfaceController* canController READ canController CONSTANT)
+    Q_PROPERTY(CanInterfaceController* canController READ canController CONSTANT)
     Q_PROPERTY(AppLogModel* logModel READ logModel CONSTANT)
 
     Q_PROPERTY(int zOrderTopMost READ zOrderTopMost CONSTANT)

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene width="800" height="600">
+<Shapes>
+<Rectangle id="rect1" x="50" y="100" width="200" height="100"
+color="#FF5733"/>
+<Circle id="circle1" width="50" height="50" cx="400" cy="300" radius="50" color="#33FF57"/>
+<Image id="img1" x="500" y="100" width="150" height="150"
+path="images/felif.png"/>
+<Line id="line1" x1="100" y1="500" x2="700" y2="500" color="#337BFF"
+thickness="3"/>
+<Text id="text1" x="100" y="250" size="30" color="#000000">UDP Data
+Visualization</Text>
+</Shapes>
+</Scene>

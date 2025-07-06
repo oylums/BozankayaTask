@@ -12,7 +12,7 @@ ApplicationWindow {
     visible: true
     width: 800
     height: 600
-    title: qsTr("Bozankaya")
+    title: qsTr("Bozankaya Tech")
 
     Dialog {
         id: senderReceiverDialog
@@ -60,12 +60,12 @@ ApplicationWindow {
         id: receiverPopup
 
         onStartClicked: {
-            console.log("Receiver başlatılıyor:", ip, port)
+            console.log("Receiver Start:", ip, port)
             qmlGlobal.udpController.startReceiver(ip, port)
         }
 
         onStopClicked: {
-            console.log("Receiver durduruluyor")
+            console.log("Stop Receiver")
             qmlGlobal.udpController.stopAll()
         }
     }
@@ -74,14 +74,19 @@ ApplicationWindow {
         id: canDialog
 
          onStartClicked: function(m_interface, bitrate) {
-           console.log("Seçilen CAN Arayüzü:", m_interface, "Bitrate:", bitrate)
+           console.log("CAN Interface:", m_interface, "Bitrate:", bitrate)
            qmlGlobal.canController.start(m_interface,bitrate)
        }
+         onSendClicked: function(canId, hexData) {
+             console.log("CAN Frame → ID:", canId, "Data:", hexData)
+             qmlGlobal.canController.sendFrame(canId, hexData)
+         }
+
     }
 
     FileDialog {
         id: fileDialog
-        title: "Bir dosya seçin"
+        title: "Choose afile"
         nameFilters: ["Xml Dosyaları (*.xml)", "JSON (*.json)"]
         onAccepted: {
             const url = Qt.resolvedUrl(selectedFiles[0])
@@ -97,7 +102,7 @@ ApplicationWindow {
 
         RowLayout {
             Layout.fillWidth: true
-            spacing: 20
+            spacing: 10
 
             Rectangle {
                 width: 16
@@ -137,8 +142,12 @@ ApplicationWindow {
             }
 
             Button {
-                text: "Stop"
+                text: "Disconnect"
                 onClicked: qmlGlobal.canController.stop()
+            }
+
+            Item {
+                Layout.preferredWidth : 8
             }
         }
 
