@@ -3,7 +3,6 @@
 
 UdpController::UdpController(QObject *parent)
 {
-    connect(_sender, &UdpSender::connectedChanged, this, &UdpController::connectedChanged);
     //connect(_receiver, &UdpReceiver::connectedChanged, this, &UdpController::connectedChanged);
 }
 
@@ -16,6 +15,7 @@ void UdpController::startSender(const QString &ip, int port)
     _sender = new UdpSender(this);
     _sender->start(ip, port);
     emit connectedChanged();
+    connect(_sender, &UdpSender::connectedChanged, this, &UdpController::connectedChanged);
 }
 
 
